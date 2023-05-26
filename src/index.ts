@@ -1,14 +1,12 @@
 import http from "http";
+import app from "./app";
 
-/** + Thay doi script start la phai khoi dong lai server
- *  + Dau Cong o terminal de co the chay cac lenh trong terminal
- *
- *  +  Tao moi Projekt bang template
- *  + File -> Fork Sandbox de tao Projekt moi sau do moi lam viec
- */
-http
-  .createServer(function(req, res) {
-    res.write("Hello Typescript!"); //write a response to the client
-    res.end(); //end the response
-  })
-  .listen(8080); //the server object listens on port 8080
+const server = http.createServer(app);
+
+const PORT_API = process.env.API_PORT;
+const port = process.env.PORT || PORT_API || 8000;
+
+// server listening
+server.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
