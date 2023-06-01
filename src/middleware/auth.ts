@@ -11,7 +11,7 @@ declare global {
 
 const config = process.env;
 
-const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
+const verifyToken = (req: any, res: any, next: NextFunction): void => {
   const token =
     req.body.token || req.query.token || req.headers["x-access-token"];
 
@@ -25,6 +25,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
   }
   try {
     const decoded = jwt.verify(token as string, config.TOKEN_KEY as string);
+    console.log("decoded", decoded);
     req.user = decoded;
   } catch (err) {
     res
