@@ -7,24 +7,27 @@ export interface IFileContent extends Document {
   text: string;
 }
 
-const fileContentSchema: Schema<IFileContent> = new mongoose.Schema({
-  fileId: {
-    type: Number,
-    required: true,
+const fileContentSchema: Schema<IFileContent> = new mongoose.Schema(
+  {
+    fileId: {
+      type: Number,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: false,
+    },
+    cover: {
+      type: String,
+      required: false,
+    },
+    text: {
+      type: String,
+      required: false,
+    },
   },
-  title: {
-    type: String,
-    required: false,
-  },
-  cover: {
-    type: String,
-    required: false,
-  },
-  text: {
-    type: String,
-    required: false,
-  },
-});
+  { timestamps: {} }
+);
 
 export const FileContent = mongoose.model<IFileContent>(
   "FileContent",

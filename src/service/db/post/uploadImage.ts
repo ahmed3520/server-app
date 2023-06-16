@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import fs from "fs";
 import { Response } from "../../../types/Response";
+import path = require("path");
 interface File {
   data: Buffer;
   mimetype: string;
@@ -16,9 +17,10 @@ async function handleUploadImage(file: File): Promise<Response> {
 
   try {
     await fs.promises.writeFile(
-      `./images/${imageRenamed}.${fileExt}`,
+      path.resolve(__dirname, `../../../images/${imageRenamed}.${fileExt}`),
       file.data
     );
+
     return {
       type: "Success",
       statusCode: 200,
